@@ -1,1 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Slideshow</title>
+  <style>
+    body {
+      margin: 0;
+      background: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    img, video {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+  </style>
+</head>
+<body>
+
+<script>
+  const mediaFiles = [
+    "ss1.png",
+    "aiaudit.mp4"
+  ];
+
+  let currentIndex = 0;
+
+  function showNext() {
+    document.body.innerHTML = "";
+
+    const file = mediaFiles[currentIndex];
+    const ext = file.split(".").pop().toLowerCase();
+
+    if (ext === "mp4") {
+      const video = document.createElement("video");
+      video.src = file;
+      video.autoplay = true;
+      video.muted = true;      // required for autoplay
+      video.playsInline = true;
+
+      video.onended = () => {
+        currentIndex = (currentIndex + 1) % mediaFiles.length;
+        showNext();
+      };
+
+      document.body.appendChild(video);
+
+    } else {
+      const img = document.createElement("img");
+      img.src = file;
+      document.body.appendChild(img);
+
+      // 0 seconds display (instant switch)
+      currentIndex = (currentIndex + 1) % mediaFiles.length;
+      setTimeout(showNext, 0);
+    }
+  }
+
+  showNext();
+</script>
+
+</body>
+</html>
 
