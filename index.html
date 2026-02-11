@@ -24,7 +24,7 @@
       position: absolute;
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
       display: none;
     }
   </style>
@@ -46,7 +46,7 @@
     const image = document.getElementById("slide-image");
     const video = document.getElementById("slide-video");
 
-    const IMAGE_DURATION = 5000; // image shows for 5 seconds
+    const IMAGE_DURATION = 10000; // image shows for 5 seconds
 
     function showImage() {
       video.pause();
